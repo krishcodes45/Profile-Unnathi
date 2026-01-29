@@ -959,3 +959,123 @@ npm			npx
 Installs packages	Runs packages
 Stored locally		Temporary execution
 Needs cleanup		No leftovers
+
+1) Architecture of V8 Engine (JavaScript Engine)
+
+The V8 engine is the JavaScript engine developed by Google and used in Google Chrome and Node.js. Its job is to execute JavaScript code efficiently and quickly. Whenever JavaScript runs in the browser or in Node.js, the V8 engine converts the code into machine instructions that the computer understands.
+
+The V8 engine works mainly in two stages: parsing and execution. First, JavaScript source code is parsed and converted into an Abstract Syntax Tree (AST). The AST represents the structure of the code. After parsing, the interpreter generates bytecode, which is an intermediate format.
+
+Then the TurboFan compiler optimizes frequently executed code and converts it into highly optimized machine code. This process is called Just-In-Time (JIT) compilation. Frequently used functions are optimized for performance.
+
+V8 also includes memory management and garbage collection. Garbage collection automatically removes unused memory objects so applications do not consume unnecessary memory.
+
+Major components of V8 include:
+
+• Parser – Converts code into AST
+• Ignition Interpreter – Converts AST to bytecode
+• TurboFan Compiler – Optimizes hot code
+• Garbage Collector – Manages memory
+
+This architecture helps JavaScript run very fast in modern applications.
+
+=== PAGE BREAK ===
+
+PAGE 19
+2) How Asynchronous Programming Works in JavaScript
+
+JavaScript runs on a single thread, meaning it executes one task at a time. However, web applications need to perform tasks like API calls, file loading, or timers without freezing the screen. This is achieved using asynchronous programming.
+
+JavaScript uses the Event Loop mechanism along with the Call Stack, Web APIs, Callback Queue, and Microtask Queue.
+
+When synchronous code runs, functions are pushed into the Call Stack and executed. If an asynchronous operation like setTimeout or fetch is called, the browser handles it using Web APIs. Once completed, the callback is placed in the callback queue.
+
+The Event Loop constantly checks whether the Call Stack is empty. When empty, it moves tasks from queues to the stack for execution.
+
+Promises and async/await use the microtask queue, which runs before the normal callback queue, making them faster.
+
+Example:
+
+console.log("Start");
+
+setTimeout(() => console.log("Timer"), 0);
+
+console.log("End");
+
+
+Output:
+Start
+End
+Timer
+
+Even with zero delay, the timer executes last due to asynchronous handling.
+
+This system allows JavaScript to handle multiple operations smoothly without blocking execution.
+
+=== PAGE BREAK ===
+
+PAGE 20
+3) Difference Between Spread and Rest Operator with Use Cases
+
+The spread operator (...) and rest operator look the same but work differently depending on where they are used.
+
+Spread Operator
+
+The spread operator expands elements of arrays or objects into individual values.
+
+Example: Copying an array
+
+let arr1 = [1, 2, 3];
+let arr2 = [...arr1];
+
+
+Example: Merging arrays
+
+let a = [1, 2];
+let b = [3, 4];
+let result = [...a, ...b];
+
+
+Example: Copying objects
+
+let user = {name: "Sam"};
+let copy = {...user};
+
+
+Spread is useful when combining or copying data without modifying originals.
+
+Rest Operator
+
+The rest operator collects multiple elements into a single array or object.
+
+Example in function parameters:
+
+function sum(...numbers) {
+  return numbers.reduce((a, b) => a + b);
+}
+
+
+Example in destructuring:
+
+let [first, ...others] = [10, 20, 30];
+
+
+Here, others becomes [20, 30].
+
+Key Difference
+
+Spread → Expands values
+Rest → Collects values
+
+Real Use Case Comparison
+
+Spread:
+
+let updated = [...oldArray, newItem];
+
+
+Rest:
+
+function logger(first, ...rest) {
+  console.log(rest);
+}
