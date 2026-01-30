@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic JavaScript Utility Project</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #ffffff;
+            margin: 20px;
+        }
+
+        hr {
+            margin: 20px 0;
+        }
+
+        button {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Basic JavaScript Utility Project</h1>
+
+<!-- DOM Manipulation -->
+<p id="text">Hello</p>
+<button onclick="changeText()">Change Text</button>
+
+<hr>
+
+<!-- String Manipulation -->
+<input type="text" id="name" placeholder="Enter name">
+<button onclick="convertUpper()">Uppercase</button>
+<p id="upperResult"></p>
+
+<hr>
+
+<!-- Array Manipulation -->
+<p id="fruits">Apple, Banana</p>
+<button onclick="addFruit()">Add Fruit</button>
+
+<hr>
+
+<!-- Date -->
+<button onclick="showDate()">Show Date</button>
+<p id="dateResult"></p>
+
+<hr>
+
+<!-- Number Conversion -->
+<button onclick="convertNumber()">Convert Number</button>
+<p id="numResult"></p>
+
+<hr>
+
+<!-- Math -->
+<button onclick="randomNumber()">Random Number</button>
+<p id="randomResult"></p>
+
+<hr>
+
+<!-- Event -->
+<button onclick="clickEvent()">Click Event</button>
+<p id="clickResult"></p>
+
+<hr>
+
+<!-- Function with return -->
+<p>Sum = <span id="sumResult"></span></p>
+
+<hr>
+
+<!-- Age Check -->
+<button onclick="checkAge()">Check Age</button>
+<p id="ageResult"></p>
+
+<hr>
+
+<!-- Required Field -->
+<input type="text" id="req" placeholder="Required field">
+<button onclick="checkField()">Submit</button>
+<p id="reqResult"></p>
+
+<script>
+    function changeText() {
+        document.getElementById("text").innerText = "Text Changed";
+    }
+
+    function convertUpper() {
+        let name = document.getElementById("name").value;
+        document.getElementById("upperResult").innerText = name.toUpperCase();
+    }
+
+    let fruitList = ["Apple", "Banana"];
+    function addFruit() {
+        fruitList.push("Orange");
+        document.getElementById("fruits").innerText = fruitList.join(", ");
+    }
+
+    function showDate() {
+        document.getElementById("dateResult").innerText = new Date();
+    }
+
+    function convertNumber() {
+        let num = "123";
+        document.getElementById("numResult").innerText = Number(num);
+    }
+
+    function randomNumber() {
+        document.getElementById("randomResult").innerText =
+            Math.floor(Math.random() * 10);
+    }
+
+    function clickEvent() {
+        document.getElementById("clickResult").innerText = "Button Clicked!";
+    }
+
+    function add(a, b) {
+        return a + b;
+    }
+    document.getElementById("sumResult").innerText = add(10, 5);
+
+    function checkAge() {
+        let age = 18;
+        document.getElementById("ageResult").innerText =
+            age >= 18 ? "Eligible" : "Not Eligible";
+    }
+
+    function checkField() {
+        let val = document.getElementById("req").value;
+        document.getElementById("reqResult").innerText =
+            val === "" ? "Field required" : "Submitted";
+    }
+</script>
+
+</body>
+</html>

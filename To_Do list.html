@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 380px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #667eea;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #667eea;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #5a6fd6;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            background-color: #f7f7f7;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .delete {
+            background-color: #ff4d4d;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .delete:hover {
+            background-color: #e60000;
+        }
+
+        #count {
+            text-align: center;
+            margin-top: 15px;
+            color: #555;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>My To-Do List</h2>
+
+    <div class="input-group">
+        <input type="text" id="taskInput" placeholder="Enter task">
+        <button onclick="addTask()">Add</button>
+    </div>
+
+    <ul id="taskList"></ul>
+
+    <p id="count">Total Tasks: 0</p>
+</div>
+
+<script>
+    let tasks = [];
+
+    function addTask() {
+        let input = document.getElementById("taskInput");
+        let text = input.value.trim();
+
+        if (text === "") {
+            alert("Please enter a task");
+            return;
+        }
+
+        let date = new Date().toLocaleString();
+        tasks.push(text + " ( " + date + " )");
+
+        input.value = "";
+        displayTasks();
+    }
+
+    function displayTasks() {
+        let list = document.getElementById("taskList");
+        list.innerHTML = "";
+
+        for (let i = 0; i < tasks.length; i++) {
+            let li = document.createElement("li");
+            li.innerText = tasks[i];
+
+            let btn = document.createElement("button");
+            btn.innerText = "Delete";
+            btn.className = "delete";
+            btn.onclick = function () {
+                deleteTask(i);
+            };
+
+            li.appendChild(btn);
+            list.appendChild(li);
+        }
+
+        document.getElementById("count").innerText =
+            "Total Tasks: " + tasks.length;
+    }
+
+    function deleteTask(index) {
+        tasks.splice(index, 1);
+        displayTasks();
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+<button onclick="checkAge()">Check Age</button>
+<p id="age"></p>
+
+<script>
+function checkAge() {
+  let age = 18;
+  document.getElementById("age").innerText =
+    age >= 18 ? "Eligible" : "Not Eligible";
+}
+</script>
+</body>
+</html>
